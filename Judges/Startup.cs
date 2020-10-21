@@ -54,7 +54,7 @@ namespace Judges
                 })
                 .AddSwaggerGen(o =>
                 {
-                    o.SwaggerDoc("v1", new OpenApiInfo() { Title = "Judges", Version = "1" });
+                    o.SwaggerDoc("v1", new OpenApiInfo() { Title = "Judges", Version = "v1" });
 
                     string xmlPath = Path.Combine(
                         AppContext.BaseDirectory,
@@ -73,7 +73,8 @@ namespace Judges
 
             app.UseRouting();
 
-            app.UseSwagger().UseSwaggerUI(o => o.SwaggerEndpoint("swagger/v1/swagger.json", "Judges"));
+            app.UseEndpoints(c => c.MapControllers());
+            app.UseSwagger().UseSwaggerUI(o => o.SwaggerEndpoint("v1/swagger.json", "Judges"));
         }
     }
 }

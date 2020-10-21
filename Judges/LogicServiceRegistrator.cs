@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Judges.Services;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Judges
         public static IServiceCollection RegisterLogicServices(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<IServiceCollection, ServiceCollection>();
+                .AddTransient<IJudgeService, JudgeService>();
 
             return serviceCollection;
         }
