@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Judges</name>
+    </assembly>
+    <members>
+        <member name="T:Judges.Data.Models.Judge">
+            <summary>
+            Судья.
+            </summary>
+        </member>
+        <member name="P:Judges.Data.Models.Judge.Name">
+            <summary>
+            ФИО
+            </summary>
+        </member>
+        <member name="P:Judges.Data.Models.Judge.Age">
+            <summary>
+            Возраст
+            </summary>
+        </member>
+        <member name="P:Judges.Data.Models.Judge.Raiting">
+            <summary>
+            Рейтинг
+            </summary>
+        </member>
+        <member name="T:Judges.Models.Settings.AppSettings">
+            <summary>
+            Настройки приложения.
+            </summary>
+        </member>
+        <member name="P:Judges.Models.Settings.AppSettings.Kestrel">
+            <summary>
+            Настройки сервера Kestrel.
+            </summary>
+        </member>
+        <member name="P:Judges.Models.Settings.AppSettings.Connection">
+            <summary>
+            Настройки подключения.
+            </summary>
+        </member>
+        <member name="T:Judges.Models.Settings.ConnectionSettings">
+            <summary>
+            Настройки подключения.
+            </summary>
+        </member>
+        <member name="P:Judges.Models.Settings.ConnectionSettings.DatabaseConnection">
+            <summary>
+            Настроки подключения к Базе данных.
+            </summary>
+        </member>
+        <member name="T:Judges.Models.Settings.KestrelSettings">
+            <summary>
+            Настройки сервера Kestrel.
+            </summary>
+        </member>
+        <member name="P:Judges.Models.Settings.KestrelSettings.Port">
+            <summary>
+            Порт.
+            </summary>
+        </member>
+    </members>
+</doc>
