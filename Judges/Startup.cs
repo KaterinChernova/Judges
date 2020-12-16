@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using Judges.Data;
 using Judges.Models.Settings;
+using Judges.Mongo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace Judges
             services
                 .RegisterLogicServices()
                 .Configure<AppSettings>(configuration)
+                .AddScoped<EventsService>()
                 .AddDbContext<JudgesDbContext>(o =>
                 {
                     o
