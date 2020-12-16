@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Judges.Controllers
 {
-    [Route("Judge")]
+    [Route("Sport")]
     [ApiController]
-    public class JudgeController : ControllerBase
+    public class SportController : ControllerBase
     {
-        private readonly IJudgeService _judgeService;
+        private readonly ISportService _sportService;
 
-        public JudgeController(IJudgeService judgeService)
+        public SportController(ISportService sportService)
         {
-            _judgeService = judgeService;
+            _sportService = sportService;
         }
 
         /// <summary>
@@ -28,34 +28,34 @@ namespace Judges.Controllers
         [Route(nameof(Get))]
         public async Task<IActionResult> Get(int id)
         {
-            var judgeDto = await _judgeService.Get(id);
-            return Ok(new { Success = true, Judge = judgeDto });
+            var SportDto = await _sportService.Get(id);
+            return Ok(new { Success = true, Sport = SportDto });
         }
 
         /// <summary>
         /// Добавление судьи.
         /// </summary>
-        /// <param name="judgeDto">Модель для добавления.</param>
+        /// <param name="SportDto">Модель для добавления.</param>
         /// <returns>Идентификатор добавленного судьи.</returns>
         [HttpPost]
         [Route(nameof(Create))]
         [Produces("application/json")]
-        public async Task<IActionResult> Create(JudgeDto judgeDto)
+        public async Task<IActionResult> Create(SportDto SportDto)
         {
-            return Ok(new { Success = true, JudgeId = await _judgeService.Create(judgeDto) });
+            return Ok(new { Success = true, SportId = await _sportService.Create(SportDto) });
         }
 
         /// <summary>
         /// Обновление судьи.
         /// </summary>
-        /// <param name="judgeDto">Модель для обновления.</param>
+        /// <param name="SportDto">Модель для обновления.</param>
         /// <returns>Идентификатор обновленной судьи.</returns>
         [HttpPost]
         [Route(nameof(Update))]
         [Produces("application/json")]
-        public async Task<IActionResult> Update(JudgeDto judgeDto)
+        public async Task<IActionResult> Update(SportDto SportDto)
         {
-            return Ok(new { Success = true, JudgeId = await _judgeService.Update(judgeDto) });
+            return Ok(new { Success = true, SportId = await _sportService.Update(SportDto) });
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Judges.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _judgeService.Delete(id);
+            await _sportService.Delete(id);
 
             return Ok(new { Success = true });
         }

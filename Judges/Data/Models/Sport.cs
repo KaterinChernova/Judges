@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Judges.Data.Models
 {
-    /// <summary>
-    /// Судья.
-    /// </summary>
-    [Table("judges")]
-    public class Judge
+    [Table("sports")]
+    public class Sport
     {
         /// <summary>
         /// Идентификатор. Уникальный ключ.
@@ -22,27 +19,18 @@ namespace Judges.Data.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// ФИО
+        /// Наименование
         /// </summary>
-        [Column("name", TypeName = "varchar(150)")]
+        [Column("name", TypeName = "varchar(200)")]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Возраст
-        /// </summary>
-        [Column("age", TypeName = "integer")]
-        public int Age { get; set; }
 
         /// <summary>
-        /// Рейтинг
+        /// Описание
         /// </summary>
-        [Column("raiting", TypeName = "numeric")]
-        public double Raiting { get; set; }
+        [Column("description", TypeName = "varchar(2000)")]
+        public string Description { get; set; }
 
-        [Column("sport_id", TypeName= "integer")]
-        public int? SportId { get; set; }
-
-        [ForeignKey("SportId")]
-        public virtual Sport Sport { get; set; }
+        public virtual ICollection<Judge> Judges { get; set; }
     }
 }

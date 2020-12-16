@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Judges.Services
 {
-    public interface IJudgeService
+    public interface ISportService
     {
-        Task<JudgeDto[]> Get(int id);
+        Task<SportDto> Get(int id);
 
-        Task<int> Create(JudgeDto judgeDto);
+        Task<int> Create(SportDto judgeDto);
 
-        Task<int> Update(JudgeDto judgeDto);
+        Task<int> Update(SportDto judgeDto);
 
         Task Delete(int id);
     }

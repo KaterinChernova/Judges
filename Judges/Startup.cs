@@ -46,9 +46,11 @@ namespace Judges
             services
                 .RegisterLogicServices()
                 .Configure<AppSettings>(configuration)
-                .AddDbContext<JudgesContext>(o =>
+                .AddDbContext<JudgesDbContext>(o =>
                 {
-                    o.UseNpgsql(settings.Connection.DatabaseConnection);
+                    o
+                    .UseLazyLoadingProxies()
+                    .UseNpgsql("Host=localhost;Port=5432;Database=minsport_judges;Username=postgres;Password=123");
 
                     o.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddDebug()));
                 })

@@ -13,7 +13,8 @@ namespace Judges
         public static IServiceCollection RegisterLogicServices(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<IJudgeService, JudgeService>();
+                .AddTransient<IJudgeService, JudgeService>()
+                .AddTransient<ISportService, SportService>();
 
             return serviceCollection;
         }
