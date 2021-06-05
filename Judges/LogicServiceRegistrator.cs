@@ -1,4 +1,7 @@
-﻿using Judges.Services;
+﻿using Judges.Data.Models;
+using Judges.Services;
+using Judges.Utils.Cache;
+using Judges.Utils.Cache.Redis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,8 +16,11 @@ namespace Judges
         public static IServiceCollection RegisterLogicServices(this IServiceCollection serviceCollection)
         {
             serviceCollection
+                .AddTransient<IMemoryCahceService<Sport>, SportsMemoryCache>()
+                .AddTransient<IRedisCache<Sport>, SportsRedisCache>()
                 .AddTransient<IJudgeService, JudgeService>()
-                .AddTransient<ISportService, SportService>();
+                .AddTransient<ISportService, SportService>()
+                .AddHttpClient<IEventService, EventService>();
 
             return serviceCollection;
         }

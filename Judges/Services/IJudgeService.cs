@@ -8,7 +8,7 @@ namespace Judges.Services
 {
     public interface IJudgeService
     {
-        Task<JudgeDto[]> Get(int id);
+        Task<JudgeDto> Get(int id);
 
         Task<int> Create(JudgeDto judgeDto);
 

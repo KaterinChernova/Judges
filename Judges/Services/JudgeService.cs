@@ -12,29 +12,18 @@ namespace Judges.Services
     public class JudgeService : IJudgeService
     {
         private readonly JudgesDbContext _judgesDbContext;
+        private readonly IEventService _eventService;
 
-        public JudgeService(JudgesDbContext judgesDbContext)
+        public JudgeService(JudgesDbContext judgesDbContext, IEventService eventService)
         {
+            _eventService = eventService ?? throw new ArgumentNullException(nameof(eventService));
             _judgesDbContext = judgesDbContext ?? throw new ArgumentNullException(nameof(judgesDbContext));
         }
 
-        public async Task<JudgeDto[]> Get(int id)
+        public async Task<JudgeDto> Get(int id)
         {
-            var judges = await _judgesDbContext.Judges
-                .Where(x => x.SportId.HasValue)
-                .ToArrayAsync();
-
-            var judgesDtos = new List<JudgeDto>();
-            foreach(var j in judges)
-            {
-                judgesDtos.Add(new JudgeDto
-                {
-                    SportName = j.Sport.Name
-                });
-            }
-
-            return await _judgesDbContext.Judges
-                .Where(x => x.Sport.Name == "Футбол")
+            var judge = await _judgesDbContext.Judges
+                .Where(x => x.Id == id)
                 .Select(x => new JudgeDto
                 {
                     Id = x.Id,
@@ -44,7 +33,14 @@ namespace Judges.Services
                     SportId = x.SportId,
                     SportName = x.Sport.Name
                 })
-                .ToArrayAsync();
+                .FirstOrDefaultAsync();
+
+            if (judge != null)
+            {
+                judge.Events = await _eventService.GetEventsForJudge();
+            }
+
+            return judge;
         }
 
         public async Task<int> Create(JudgeDto judgeDto)

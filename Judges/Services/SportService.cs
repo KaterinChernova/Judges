@@ -1,5 +1,7 @@
 ﻿using Judges.Data;
 using Judges.Data.Models;
+using Judges.Utils.Cache;
+using Judges.Utils.Cache.Redis;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,17 @@ namespace Judges.Services
     public class SportService : ISportService
     {
         private readonly JudgesDbContext _judgesDbContext;
+        private readonly IRedisCache<Sport> _sportCache;
 
-        public SportService(JudgesDbContext judgesDbContext)
+        public SportService(JudgesDbContext judgesDbContext, IRedisCache<Sport> sportCache)
         {
+            _sportCache = sportCache ?? throw new ArgumentNullException(nameof(sportCache));
             _judgesDbContext = judgesDbContext ?? throw new ArgumentNullException(nameof(judgesDbContext));
         }
 
         public async Task<SportDto> Get(int id)
         {
-            return await _judgesDbContext.Sports
+            return _sportCache.GetData()
                 .Where(x => x.Id == id)
                 .Select(x => new SportDto
                 {
@@ -28,7 +32,7 @@ namespace Judges.Services
                     Name = x.Name,
                     Description = x.Description
                 })
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
         }
 
         public async Task<int> Create(SportDto judgeDto)

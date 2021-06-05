@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Judges.Data.Dto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -41,5 +42,10 @@ namespace Judges.Data.Models
         /// Вид Спорта.
         /// </summary>
         public string SportName { get; set; }
+
+        /// <summary>
+        /// Мероприятия.
+        /// </summary>
+        public EventDto[] Events { get; set; }
     }
 }

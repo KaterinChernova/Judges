@@ -47,7 +47,12 @@ namespace Judges
             services
                 .RegisterLogicServices()
                 .Configure<AppSettings>(configuration)
-                .AddScoped<EventsService>()
+                .AddMemoryCache()
+                .AddDistributedRedisCache(ro =>
+                {
+                    ro.Configuration = "127.0.0.1:6379";
+                    ro.InstanceName = "master";
+                })
                 .AddDbContext<JudgesDbContext>(o =>
                 {
                     o

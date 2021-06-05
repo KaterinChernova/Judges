@@ -29,7 +29,8 @@ namespace Judges.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var judgeDto = await _judgeService.Get(id);
-            return Ok(new { Success = true, Judge = judgeDto });
+
+            return Ok(new { Success = true, Judge = judgeDto});
         }
 
         /// <summary>
