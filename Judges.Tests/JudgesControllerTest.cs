@@ -19,12 +19,12 @@ namespace Judges.Tests
         [SetUp]
         public void SetUp()
         {
-            var mockJudgeService = new Mock<IJudgeService>();
-            mockJudgeService
-                .Setup(a => a.Get(2))
-                .Returns(Task.FromResult(new[] { new JudgeDto { Id = 2, Name = "Test", Age = 20 } }));
+            //var mockJudgeService = new Mock<IJudgeService>();
+            //mockJudgeService
+            //    .Setup(a => a.Get(2))
+            //    .Returns(Task.FromResult(new[] { new JudgeDto { Id = 2, Name = "Test", Age = 20 } }));
 
-            judgesController = new JudgeController(mockJudgeService.Object);
+            //judgesController = new JudgeController(mockJudgeService.Object);
         }
 
         [Test]
